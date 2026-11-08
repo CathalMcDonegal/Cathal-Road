@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#101214",
-  "theme_color": "#111315",
+  "background_color": "#f4f2ec",
+  "theme_color": "#f4f2ec",
   "icons": [
     {
       "src": "assets/cathal-road-icon.svg",
