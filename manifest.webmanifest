@@ -11,9 +11,9 @@
   "theme_color": "#111315",
   "icons": [
     {
-      "src": "assets/cathal-road-icon.jpg",
+      "src": "assets/cathal-road-icon.svg",
       "sizes": "any",
-      "type": "image/jpeg",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
