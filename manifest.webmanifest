@@ -1,0 +1,20 @@
+{
+  "name": "Cathal Road",
+  "short_name": "Cathal Road",
+  "description": "El teu centre de comandament per a la moto i els viatges.",
+  "lang": "ca",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101214",
+  "theme_color": "#111315",
+  "icons": [
+    {
+      "src": "assets/cathal-road-icon.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
