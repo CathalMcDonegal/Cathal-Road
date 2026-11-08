@@ -1,5 +1,5 @@
-const CACHE='cathal-road-v7';
+const CACHE='cathal-road-v8';
 const CORE=['./','./index.html','./manifest.webmanifest','./assets/cathal-road-icon.svg'];
-self.addEventListener('install',event=>event.waitUntil((async()=>{const c=await caches.open(CACHE);await Promise.all(CORE.map(async u=>{try{const r=await fetch(u,{cache:'reload'});if(r.ok)await c.put(u,r)}catch(e){}}));await self.skipWaiting()})()));
-self.addEventListener('activate',event=>event.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith('cathal-road-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
-self.addEventListener('fetch',event=>{const q=event.request;if(q.method!=='GET'||new URL(q.url).origin!==self.location.origin)return;event.respondWith((async()=>{try{const r=await fetch(q);if(r.ok){const c=await caches.open(CACHE);c.put(q,r.clone())}return r}catch(e){return await caches.match(q)||await caches.match('./index.html')}})())});
+self.addEventListener('install',event=>event.waitUntil((async()=>{const c=await caches.open(CACHE);await Promise.all(CORE.map(async path=>{try{const r=await fetch(path,{cache:'reload'});if(r.ok)await c.put(path,r)}catch(e){}}));await self.skipWaiting()})()));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('cathal-road-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;event.respondWith((async()=>{try{const fresh=await fetch(req);if(fresh.ok){const c=await caches.open(CACHE);c.put(req,fresh.clone())}return fresh}catch(e){return await caches.match(req)||await caches.match('./index.html')}})())});
