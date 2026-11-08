@@ -1,5 +1,5 @@
-const CACHE='cathal-road-v6';
-const CORE=['./','./index.html','./manifest.webmanifest'];
-self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE);await Promise.all(CORE.map(async url=>{try{const response=await fetch(url,{cache:'reload'});if(response.ok)await cache.put(url,response)}catch(e){}}));await self.skipWaiting()})())});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key.startsWith('cathal-road-')&&key!==CACHE).map(key=>caches.delete(key)));await self.clients.claim()})())});
-self.addEventListener('fetch',event=>{const request=event.request;if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;event.respondWith((async()=>{try{const response=await fetch(request);if(response.ok){const cache=await caches.open(CACHE);cache.put(request,response.clone())}return response}catch(error){const cached=await caches.match(request);if(cached)return cached;return caches.match('./index.html')}})())});
+const CACHE='cathal-road-v7';
+const CORE=['./','./index.html','./manifest.webmanifest','./assets/cathal-road-icon.svg'];
+self.addEventListener('install',event=>event.waitUntil((async()=>{const c=await caches.open(CACHE);await Promise.all(CORE.map(async u=>{try{const r=await fetch(u,{cache:'reload'});if(r.ok)await c.put(u,r)}catch(e){}}));await self.skipWaiting()})()));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith('cathal-road-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener('fetch',event=>{const q=event.request;if(q.method!=='GET'||new URL(q.url).origin!==self.location.origin)return;event.respondWith((async()=>{try{const r=await fetch(q);if(r.ok){const c=await caches.open(CACHE);c.put(q,r.clone())}return r}catch(e){return await caches.match(q)||await caches.match('./index.html')}})())});
